@@ -11,10 +11,17 @@ I built a small fictional organization, Medical Health Clinic IT, and walked thr
 | Leaver | Mike Jones, a Sales Analyst, retires |
 
 Skills demonstrated
-•	User provisioning and attribute management (job title, department, manager, employee ID), Security group design and group-based access control, Least privilege and preventing privilege creep, Microsoft Entra admin role assignment and removal, Secure offboarding: removing access, blocking sign-in, revoking sessions, soft-delete, Auditing and evidence collection with Entra ID audit and sign-in logs, Troubleshooting an unexpected platform behavior during offboarding.
++ User provisioning and attribute management (job title, department, manager, employee ID)
++ Security group design and group-based access control
++ Least privilege and preventing privilege creep
++ Microsoft Entra admin role assignment and removal
++ Secure offboarding: removing access, blocking sign-in, revoking sessions, soft-delete
++ Auditing and evidence collection with Entra ID audit and sign-in logs
++ Troubleshooting an unexpected platform behavior during offboarding
 
 
 1. Building the Environment
+   
 Before running any lifecycle events, I needed an organization to work in: departments with defined access, and existing employees.
 
 Security groups
@@ -33,9 +40,8 @@ All groups used Assigned Membership, meaning an Admin controls who is in them.
 <img width="1027" height="606" alt="Screenshot 2026-11-04 222505" src="https://github.com/user-attachments/assets/79a960df-d6d9-4990-b88d-c5a63c22f0f0" />
 
 Existing employees
-I created four existing employees, each with a job title, department, employee ID, and manager. Managers matter because in real organizations they approve access requests and are involved in deprovisioning.
 
-
+I created four existing employees, each with a job title, department, and manager. Managers matter because in real organizations they approve access requests and are involved in deprovisioning.
 
 
 | Name | Job title | Department | Manager
@@ -50,21 +56,26 @@ I added everyone to SEC-AllStaff and to their department's group.
 <img width="580" height="270" alt="Screenshot 2026-11-05 192523" src="https://github.com/user-attachments/assets/ee1c6a4f-a0cf-47b9-b90d-f7e52a35ec95" />
 
 Admin role
-Help desk staff need to reset users' passwords, so I assigned Jesse the Helpdesk Administrator role, even though his role is Service Desk, these roles are similar in real IT environment. 
 
+Help desk staff need to reset users' passwords, so I assigned Jesse the Helpdesk Administrator role, even though his role is Service Desk, these roles are similar in real IT environment. 
 
 <img width="501" height="313" alt="Screenshot 2026-11-05 195808" src="https://github.com/user-attachments/assets/b7f6978b-bc60-4d0e-9d43-a8dab052b43d" />
 
 Group membership controls access to resources, while Entra admin roles control what someone can do to the directory itself. Because admin roles are high-risk, they need to be removed as soon as someone no longer needs them, which became important in the Mover stage.
 
 2. Joiner — Fred Taylor
+
 Scenario: HR notified IT that Fred Taylor was hired as a Sales Analyst reporting to Mike Jones.
+
 Account creation
-I created Fred's account with his job title, department, employee ID, and manager, and used an auto-generated temporary password. IT should never know a user's real password; the temporary password is handed off securely, and Entra forces the user to set their own at first sign-in.
+
+
+I created Fred's account with his job title, department, and manager, and used an auto-generated temporary password. IT should never know a user's real password; the temporary password is handed off securely, and Entra forces the user to set their own at first sign-in.
 
 <img width="520" height="597" alt="Screenshot 2026-11-05 200840" src="https://github.com/user-attachments/assets/997fb7e3-4327-4a8a-b568-1df0ca24413d" />
 
 Least-privilege access
+
 I added Fred to only SEC-AllStaff-Users and SEC-Sales-Users. He received no Help Desk or Security access and no admin roles. This is least privilege: giving people only the access their role requires.
 
 <img width="944" height="270" alt="Screenshot 2026-11-05 201756" src="https://github.com/user-attachments/assets/d8748e9e-04f6-4cf5-a02a-a37d77b4be9c" />
@@ -75,6 +86,7 @@ I signed in as Fred in a private browser window to confirm the account worked, c
 <img width="592" height="321" alt="Screenshot 2026-11-05 202913" src="https://github.com/user-attachments/assets/8c6724a2-2593-4598-84d9-a145ee97c4ca" />
 
 3. Mover — Jesse Junior
+   
 Scenario: Jesse Junior was promoted from Help Desk Analyst/SD to Security Analyst. Avoiding privilege creep
 
 <img width="765" height="315" alt="Screenshot 2026-11-05 205404" src="https://github.com/user-attachments/assets/4da04da8-4355-4690-b923-6d947779a397" />
@@ -86,7 +98,9 @@ I documented Jesse’s access before making any changes, to create an audit trai
 
 <img width="839" height="322" alt="Screenshot 2026-11-05 204728" src="https://github.com/user-attachments/assets/1ab90597-4e32-41d4-b4b2-0edbe457c25a" />
 
-Changes made Updated attributes: Changed Job title to Security Analyst and Department to Security. These attributes are the source of truth for directories, org charts, and automated access rules. Added new access: added Jesse to SEC-Dept-Security and assigned the Security Administrator role. Removed old access: removed Jesse from SEC-Dept-IT-HelpDesk and removed the Helpdesk Administrator role.
+Changes made 
+
+Updated attributes: Changed Job title to Security Analyst and Department to Security. These attributes are the source of truth for directories, org charts, and automated access rules. Added new access: added Jesse to SEC-Dept-Security and assigned the Security Administrator role. Removed old access: removed Jesse from SEC-Dept-IT-HelpDesk and removed the Helpdesk Administrator role.
 
 <img width="645" height="370" alt="Screenshot 2026-11-05 205201" src="https://github.com/user-attachments/assets/f9508218-a30c-47dd-9a4c-ecafcadbc677" />
 
