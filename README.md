@@ -11,7 +11,7 @@ I built a small fictional organization, Medical Health Clinic IT, and walked thr
 | Leaver | Mike Jones, a Sales Analyst, retires |
 
 Skills demonstrated
-+ User provisioning and attribute management (job title, department, manager,)
++ User provisioning and attribute management (job title, department, manager)
 + Security group design and group-based access control
 + Least privilege and preventing privilege creep
 + Microsoft Entra admin role assignment and removal
