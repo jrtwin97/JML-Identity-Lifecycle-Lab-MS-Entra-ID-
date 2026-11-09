@@ -1,4 +1,4 @@
-# JML-Identity-Lifecycle-Lab-MS-Entra-ID-
+# JML-Identity-Lifecycle-Lab-MS-Entra-ID
 Overview
 In this lab I simulated the full identity lifecycle of employees in Microsoft Entra ID: onboarding a new hire, processing an internal promotion, and offboarding a departing employee. This process is known as Joiner–Mover–Leaver (JML), and it's one of the core responsibilities of Identity and Access Management (IAM).
 
